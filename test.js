@@ -4,16 +4,12 @@ const userInput = document.getElementById('user-input');
 const resultsDiv = document.getElementById('results-div');
 
 // EVENTS - BUTTONS
-
+userInput.value = "";
 
 // EVENTS - FUNCTIONS
 //const filterNumber = (userInput) => {};
-function clearInfo(a) {
-    if (a != "" && a != null) {
-        userInput.innerText = "";
-        console.log('hi2');
-    }
-}
+function clearInfo() { if (userInput.value != "") userInput.value = ""; }
 
-clearButton.addEventListener('click', clearInfo(userInput));
+clearButton.addEventListener('click', clearInfo);
 //checkButton.addEventListener('', clearInfo(userInput));
+
