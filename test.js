@@ -18,9 +18,11 @@ userInput.value = "";
  
     // IF CHECKS
     if (userInput.value === "") alert("Please provide a phone number");
-    else if (filteredInput[0] != 1 || filteredInput.length != 11) {
-        resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
-    } else resultsDiv.innerHTML = "Valid US number: " + userInput.value;
+    else if (filteredInput[0] == 1 || filteredInput.length == 11) 
+        resultsDiv.innerHTML = "Valid US number: " + userInput.value;
+    else if (filteredInput[0] != 1 && filteredInput.length == 10)
+        resultsDiv.innerHTML = "Valid US number: " + userInput.value;
+    else resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
  }
 
 clearButton.addEventListener('click', clearInfo);
