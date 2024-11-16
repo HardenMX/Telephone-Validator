@@ -7,10 +7,15 @@ const resultsDiv = document.getElementById('results-div');
 userInput.value = "";
 
 // EVENTS - FUNCTIONS
- function clearInfo () { if (userInput.value != "") userInput.value = ""; }
+ function clearInfo () { if (userInput.value != "") {
+    userInput.value = "";
+    resultsDiv.remove();
+    } 
+}
  function checkInfo () {
     // INPUT FILTER
     const filteredInput = userInput.value.replace(/[()\- ]/gi, "");
+ 
     // IF CHECKS
     if (userInput.value === "") alert("Please provide a phone number");
     else if (filteredInput[0] != 1 || filteredInput.length != 11) {
