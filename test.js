@@ -7,9 +7,22 @@ const resultsDiv = document.getElementById('results-div');
 userInput.value = "";
 
 // EVENTS - FUNCTIONS
-//const filterNumber = (userInput) => {};
-function clearInfo() { if (userInput.value != "") userInput.value = ""; }
+ function clearInfo () { if (userInput.value != "") userInput.value = ""; }
+ function checkInfo () {
+    // INPUT FILTER
+    const filteredInput = userInput.value.replace(/[()\- ]/gi, "");
+    console.log(filteredInput);
+    
+    // IF CHECKS
+    if (filteredInput === "") {
+        window.alert("Please provide a phone number");
+    } else if (filteredInput[0] != 1 || filteredInput.length != 11) {
+        resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
+    } else resultsDiv.innerHTML = "Valid US number: " + userInput.value;
+ }
 
 clearButton.addEventListener('click', clearInfo);
-//checkButton.addEventListener('', clearInfo(userInput));
+checkButton.addEventListener('click', checkInfo);
+
+
 
