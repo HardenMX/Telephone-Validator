@@ -7,12 +7,11 @@ const resultsDiv = document.getElementById('results-div');
 userInput.value = "";
 
 // EVENTS - FUNCTIONS
- function clearInfo () { if (userInput.value != "") {
+const clearInfo = () => { if (userInput.value != "") {
     userInput.value = "";
     resultsDiv.remove();
-    } 
-}
- function checkInfo () {
+    }}
+const checkInfo = () => {
     // INPUT FILTER
     const filteredInput = userInput.value.replace(/[()\- ]/gi, "");
  
