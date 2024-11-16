@@ -7,19 +7,18 @@ const resultsDiv = document.getElementById('results-div');
 userInput.value = "";
 
 // EVENTS - FUNCTIONS
-//const filterNumber = (userInput) => {};
-const filterRegex = /\w+/gi
-
  function clearInfo () { if (userInput.value != "") userInput.value = ""; }
  function checkInfo () {
-    // CREATE FILTER FOR -, (),
-    if (userInput.value === "") {
+    // INPUT FILTER
+    const filteredInput = userInput.value.replace(/[()\- ]/gi, "");
+    console.log(filteredInput);
+    
+    // IF CHECKS
+    if (filteredInput === "") {
         window.alert("Please provide a phone number");
-
-        //ELSE IF DOESNT WORK CHANGE THIS
-    } else if (userInput.value.includes(filterRegex)) {
-        window.alert("Invalid US number: " + userInput);
-    }
+    } else if (filteredInput[0] != 1 || filteredInput.length != 11) {
+        resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
+    } else resultsDiv.innerHTML = "Valid US number: " + userInput.value;
  }
 
 clearButton.addEventListener('click', clearInfo);
