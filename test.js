@@ -3,10 +3,10 @@ const clearButton = document.getElementById('clear-btn');
 const userInput = document.getElementById('user-input');
 const resultsDiv = document.getElementById('results-div');
 
-// EVENTS - BUTTONS
+// VARS
 userInput.value = "";
 
-// EVENTS - FUNCTIONS
+// EVENTS - BUTTONS
 const clearInfo = () => { if (userInput.value != "") {
     userInput.value = "";
     resultsDiv.remove();
@@ -14,7 +14,7 @@ const clearInfo = () => { if (userInput.value != "") {
 const checkInfo = () => {
     // INPUT FILTER
     const filteredInput = userInput.value.replace(/[()\- ]/gi, "");
- 
+    if (userInput.value.includes(')'))
     // IF CHECKS
     if (userInput.value === "") alert("Please provide a phone number");
     else if (filteredInput[0] == 1 && filteredInput.length == 11 && [...filteredInput].every(char => char >= '0' && char <= '9')) 
@@ -24,8 +24,5 @@ const checkInfo = () => {
     else resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
  }
 
-clearButton.addEventListener('click', clearInfo);
 checkButton.addEventListener('click', checkInfo);
-
-
-
+clearButton.addEventListener('click', clearInfo);
