@@ -17,7 +17,7 @@ const checkInfo = () => {
  
     // IF CHECKS
     if (userInput.value === "") alert("Please provide a phone number");
-    else if (filteredInput[0] == 1 || filteredInput.length == 11) 
+    else if (filteredInput[0] == 1 && filteredInput.length == 11 && [...filteredInput].every(char => char >= '0' && char <= '9')) 
         resultsDiv.innerHTML = "Valid US number: " + userInput.value;
     else if (filteredInput[0] != 1 && filteredInput.length == 10)
         resultsDiv.innerHTML = "Valid US number: " + userInput.value;
