@@ -19,11 +19,11 @@ const checkInfo = () => {
     let matches1 = userInput.value.match(/-/g, 0);
     if (matches1 == null) matches1 = 0;
     //console.log(matches1);
-
+    console.log(userInput.value[4]);
     // IF CHECKS
     if (userInput.value === "") alert("Please provide a phone number");
-    else if (userInput.value[0] === ')' || userInput.value[0] === '(' || userInput.value[0] === '-')
-         resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
+    else if (userInput.value[0] === ')' || userInput.value[0] === '(' && userInput.value[4] != ')' || userInput.value[0] === '-' )
+         resultsDiv.innerHTML = "Invalid US number: " + userInput.value ;
     else if (matches1.length >= 3) resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
     else if (filteredInput[0] == 1 && filteredInput.length == 11 && [...filteredInput].every(char => char >= '0' && char <= '9')) 
         resultsDiv.innerHTML = "Valid US number: " + userInput.value;
