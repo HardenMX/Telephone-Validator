@@ -13,10 +13,13 @@ const clearInfo = () => { if (userInput.value != "") {
     }}
 const checkInfo = () => {
     // INPUT FILTER
-    const filteredInput = userInput.value.replace(/[()\- ]/gi, "");
-    if (userInput.value.includes(')'))
+    const regexFilter = /[()\- ]/gi;
+    const filteredInput = userInput.value.replace(regexFilter, "");
+    let matches = userInput.value.match(regexFilter);
     // IF CHECKS
     if (userInput.value === "") alert("Please provide a phone number");
+    else if (userInput.value[0] === ')' || userInput.value[0] === '(' || userInput.value[0] === '-')
+         resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
     else if (filteredInput[0] == 1 && filteredInput.length == 11 && [...filteredInput].every(char => char >= '0' && char <= '9')) 
         resultsDiv.innerHTML = "Valid US number: " + userInput.value;
     else if (filteredInput[0] != 1 && filteredInput.length == 10)
