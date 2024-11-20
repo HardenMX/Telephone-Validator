@@ -16,15 +16,23 @@ const checkInfo = () => {
     // INPUT FILTER
     const regexFilter = /[()\- ]/gi;
     const filteredInput = userInput.value.replace(regexFilter, "");
-    let matches1 = userInput.value.match(/-/g, 0);
+    let matches1 = userInput.value.match(/-/g);
+    let matches2 = userInput.value.match(/\(/g);
+    let matches3 = userInput.value.match(/\)/g);
     if (matches1 == null) matches1 = 0;
-    //console.log(matches1);
-    console.log(userInput.value[4]);
+    if (matches2 == null) matches2 = 0;
+    if (matches3 == null) matches3 = 0;
+    console.log(matches2.length, matches3.length);
+    
     // IF CHECKS
     if (userInput.value === "") alert("Please provide a phone number");
     else if (userInput.value[0] === ')' || userInput.value[0] === '(' && userInput.value[4] != ')' || userInput.value[0] === '-' )
          resultsDiv.innerHTML = "Invalid US number: " + userInput.value ;
     else if (matches1.length >= 3) resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
+    else if (matches2.length != 1 && matches3.length == 0)
+             resultsDiv.innerHTML = "Invalid US number: " + userInput.value + " one";
+    else if (matches2.length != 0 && matches3.length == 1)
+        resultsDiv.innerHTML = "Invalid US number: " + userInput.value + " two";
     else if (filteredInput[0] == 1 && filteredInput.length == 11 && [...filteredInput].every(char => char >= '0' && char <= '9')) 
         resultsDiv.innerHTML = "Valid US number: " + userInput.value;
     else if (filteredInput[0] != 1 && filteredInput.length == 10)
