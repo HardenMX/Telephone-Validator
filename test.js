@@ -7,12 +7,6 @@ const resultsDiv = document.getElementById('results-div');
 userInput.value = "";
 let matches1 = 0, matches2 = 0, matches3 = 0;
 
-// EVENTS - BUTTONS
-const clearInfo = () => { if (userInput.value) {
-    userInput.value = "";
-    resultsDiv.innerText = "";
-    }}
-
     // COUNT ALL THESE SYMBOLS ---> -, (, ).
     const countSymbols = () => {
         matches1 = userInput.value.includes("-") ? userInput.value.match(/-/g).length : 0;  
@@ -41,6 +35,15 @@ const checkInfo = () => {
     else if (filteredInput[0] != 1 && filteredInput.length == 10)
         resultsDiv.innerHTML = "Valid US number: " + userInput.value;
     else resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
+
+    userInput.focus();
+    }
+
+const clearInfo = () => { 
+    userInput.value = "";
+    resultsDiv.innerHTML = "";
+    userInput.focus();
+    return ;
     }
 
 checkButton.addEventListener('click', checkInfo);
