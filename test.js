@@ -5,6 +5,7 @@ const resultsDiv = document.getElementById('results-div');
 
 // VARS
 userInput.value = "";
+let matches1 = 0, matches2 = 0, matches3 = 0;
 
 // EVENTS - BUTTONS
 const clearInfo = () => { if (userInput.value) {
@@ -12,27 +13,29 @@ const clearInfo = () => { if (userInput.value) {
     resultsDiv.innerText = "";
     }}
 
+    // COUNT ALL THESE SYMBOLS ---> -, (, ).
+    const countSymbols = () => {
+        matches1 = userInput.value.includes("-") ? userInput.value.match(/-/g).length : 0;  
+        matches2 = userInput.value.includes("(") ? userInput.value.match(/\(/g).length : 0;
+        matches3 = userInput.value.includes(")") ? userInput.value.match(/\)/g).length : 0;  
+    }
+    
 const checkInfo = () => {
     // INPUT FILTER
     const regexFilter = /[()\- ]/gi;
     const filteredInput = userInput.value.replace(regexFilter, "");
-    let matches1 = userInput.value.match(/-/g);
-    let matches2 = userInput.value.match(/\(/g);
-    let matches3 = userInput.value.match(/\)/g);
-    if (matches1 == null) matches1 = 0;
-    if (matches2 == null) matches2 = 0;
-    if (matches3 == null) matches3 = 0;
-    console.log(matches2.length, matches3.length);
-    
+    countSymbols();
+
     // IF CHECKS
     if (userInput.value === "") alert("Please provide a phone number");
     else if (userInput.value[0] === ')' || userInput.value[0] === '(' && userInput.value[4] != ')' || userInput.value[0] === '-' )
          resultsDiv.innerHTML = "Invalid US number: " + userInput.value ;
-    else if (matches1.length >= 3) resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
-    else if (matches2.length != 1 && matches3.length == 0)
-             resultsDiv.innerHTML = "Invalid US number: " + userInput.value + " one";
-    else if (matches2.length != 0 && matches3.length == 1)
-        resultsDiv.innerHTML = "Invalid US number: " + userInput.value + " two";
+    else if (matches1 >= 3 && matches2 > 1 && matches3 > 1) resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
+    else if (userInput.value[userInput.value.length-2] == "-") resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
+    else if (matches2 == 1 && matches3 != 1)
+            resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
+    else if (matches2 != 1 && matches3 == 1)
+            resultsDiv.innerHTML = "Invalid US number: " + userInput.value;
     else if (filteredInput[0] == 1 && filteredInput.length == 11 && [...filteredInput].every(char => char >= '0' && char <= '9')) 
         resultsDiv.innerHTML = "Valid US number: " + userInput.value;
     else if (filteredInput[0] != 1 && filteredInput.length == 10)
